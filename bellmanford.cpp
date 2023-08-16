@@ -37,15 +37,15 @@ void BellmanFord(struct Edge* edges, int V, int E, int src) {
 
 int main() {
     int V, E;
-    cout << "Enter number of vertices: ";
+
     cin >> V;
-    cout << "Enter number of edges: ";
+
     cin >> E;
 
     struct Edge* edges = new Edge[E];
 
     for (int i = 0; i < E; i++) {
-        cout << "Enter source, destination and weight for edge " << i+1 << ": ";
+        
         cin >> edges[i].src >> edges[i].dest >> edges[i].weight;
     }
 
