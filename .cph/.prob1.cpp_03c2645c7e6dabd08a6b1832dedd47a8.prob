@@ -1,0 +1,1 @@
+{"name":"Local: prob1","url":"d:\\Workspace\\Contest workspace\\CSES\\prob1.cpp","tests":[{"id":1692723129483,"input":"7\n6\n1 3 2\n1 2 5\n0 1 3\n3 2 1\n3 4 50\n2 5 10\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Workspace\\Contest workspace\\CSES\\prob1.cpp","group":"local","local":true}

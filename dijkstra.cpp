@@ -1,60 +1,60 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int minDistance(vector<int> dist, vector<bool> sptSet) {
-    int min = INT_MAX, min_index;
+int findMinDistance(vector<int> distance, vector<bool> visitedSet) {
+    int minValue = INT_MAX, minIndex;
 
-    for (int v = 0; v < dist.size(); v++)
-        if (sptSet[v] == false && dist[v] <= min)
-            min = dist[v], min_index = v;
+    for (int v = 0; v < distance.size(); v++)
+        if (visitedSet[v] == false && distance[v] <= minValue)
+            minValue = distance[v], minIndex = v;
 
-    return min_index;
+    return minIndex;
 }
 
-void printSolution(vector<int> dist) {
-    printf("Vertex \t\t Distance from Source\n");
-    for (int i = 0; i < dist.size(); i++)
-        printf("%d \t\t %d\n", i, dist[i]);
+void displaySolution(vector<int> distance) {
+    cout << "Vertex \t\t Distance from Source\n";
+    for (int i = 0; i < distance.size(); i++)
+        cout << i << "\t\t" << distance[i] << "\n";
 }
 
-void dijkstra(vector<vector<int>> graph, int src) {
-    vector<int> dist(graph.size());
+void dijkstraAlgorithm(vector<vector<int>> adjacencyMatrix, int source) {
+    vector<int> distance(adjacencyMatrix.size());
 
-    vector<bool> sptSet(graph.size());
+    vector<bool> visitedSet(adjacencyMatrix.size());
 
-    for (int i = 0; i < graph.size(); i++)
-        dist[i] = INT_MAX, sptSet[i] = false;
+    for (int i = 0; i < adjacencyMatrix.size(); i++)
+        distance[i] = INT_MAX, visitedSet[i] = false;
 
-    dist[src] = 0;
+    distance[source] = 0;
 
-    for (int count = 0; count < graph.size() - 1; count++) {
-        int u = minDistance(dist, sptSet);
+    for (int count = 0; count < adjacencyMatrix.size() - 1; count++) {
+        int u = findMinDistance(distance, visitedSet);
 
-        sptSet[u] = true;
+        visitedSet[u] = true;
 
-        for (int v = 0; v < graph.size(); v++)
-            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX
-                && dist[u] + graph[u][v] < dist[v])
-                dist[v] = dist[u] + graph[u][v];
+        for (int v = 0; v < adjacencyMatrix.size(); v++)
+            if (!visitedSet[v] && adjacencyMatrix[u][v] && distance[u] != INT_MAX
+                && distance[u] + adjacencyMatrix[u][v] < distance[v])
+                distance[v] = distance[u] + adjacencyMatrix[u][v];
     }
 
-    printSolution(dist);
+    displaySolution(distance);
 }
 
 int main() {
-    int vertices;
-    cin >> vertices;
+    int totalVertices;
+    cin >> totalVertices;
 
-    vector<vector<int>> graph(vertices, vector<int>(vertices));
+    vector<vector<int>> adjacencyMatrix(totalVertices, vector<int>(totalVertices));
 
-    printf("Enter the adjacency matrix:\n");
-    for(int i=0; i<vertices; i++) {
-        for(int j=0; j<vertices; j++) {
-            scanf("%d", &graph[i][j]);
+    cout << "Enter the adjacency matrix:\n";
+    for(int i=0; i<totalVertices; i++) {
+        for(int j=0; j<totalVertices; j++) {
+            cin >> adjacencyMatrix[i][j];
         }
     }
 
-    dijkstra(graph, 0);
+    dijkstraAlgorithm(adjacencyMatrix, 0);
 
     return 0;
 }
